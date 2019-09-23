@@ -1,0 +1,10 @@
+{
+  "private":true,
+  "scripts": {
+    "start": "jest",
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "24.9.0"
+  }
+}
