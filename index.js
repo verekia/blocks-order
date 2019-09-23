@@ -1,9 +1,11 @@
 const order = blocks => {
-  const newBlocks = blocks
+  let currentLine = 0
 
+  blocks.forEach((b, i) => {
+    b.line = currentLine // That's what we have to fix
+  })
 
-
-  return newBlocks
+  return blocks
 }
 
 module.exports = order
