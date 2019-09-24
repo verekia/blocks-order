@@ -9,40 +9,29 @@ const findAvailableLine = (lineslastEnd, newStartBound) => {
   return lineslastEnd.length
 }
 
-const clearLineslastEnd = (lineslastEnd, newEndBound) => {
-  const newLineslastEnd = []
-  for (i = 0; i < lineslastEnd.length; i++) {
-    if (lineslastEnd[i] < newEndBound) {
-      return
-    } else {
-      newLineslastEnd.push(lineslastEnd[i])
-    }
-  }
-  return newLineslastEnd
-}
-
 const order = intervals => {
+  const sortedIntervals = _.sortBy(intervals, x => x.start)
+
   let boundObjects = []
 
-  intervals.forEach(interval => {
+  sortedIntervals.forEach(interval => {
     boundObjects.push({ bound: interval.start, type: 'start', interval })
     boundObjects.push({ bound: interval.end, type: 'end', interval })
   })
 
-  const sortedBoundObjects = _.sortBy(boundObjects, boundObject => boundObject.bound)
+  const sortedBoundObjects = _.sortBy(boundObjects, x => x.bound)
 
-  let lineslastEnd = []
+  const lineslastEnd = []
 
   sortedBoundObjects.forEach(boundObject => {
     if (boundObject.type === 'start') {
-      boundObject.interval.line = findAvailableLine(lineslastEnd)
-      lineslastEnd.push(boundObject.interval.end)
-    } else if (boundObject.type === 'end') {
-      lineslastEnd = clearLineslastEnd(boundObject.bound)
+      const availableLine = findAvailableLine(lineslastEnd, boundObject.bound)
+      boundObject.interval.line = availableLine
+      lineslastEnd[availableLine] = boundObject.interval.end
     }
   })
 
-  return intervals
+  return sortedIntervals
 }
 
 module.exports = { order, findAvailableLine }
