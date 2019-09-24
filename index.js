@@ -1,5 +1,4 @@
 const sortBy = require('lodash/sortBy')
-const min = require('lodash/min')
 
 const findAvailableLine = (lineslastEnd, newStartBound) => {
   const index = lineslastEnd.findIndex(x => x < newStartBound)
