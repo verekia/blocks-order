@@ -21,12 +21,12 @@ const clearLineslastEnd = (lineslastEnd, newEndBound) => {
   return newLineslastEnd
 }
 
-const order = blocks => {
+const order = intervals => {
   let boundObjects = []
 
-  blocks.forEach(block => {
-    boundObjects.push({ bound: block.start, type: 'start', block })
-    boundObjects.push({ bound: block.end, type: 'end', block })
+  intervals.forEach(interval => {
+    boundObjects.push({ bound: interval.start, type: 'start', interval })
+    boundObjects.push({ bound: interval.end, type: 'end', interval })
   })
 
   const sortedBoundObjects = _.sortBy(boundObjects, boundObject => boundObject.bound)
@@ -35,14 +35,14 @@ const order = blocks => {
 
   sortedBoundObjects.forEach(boundObject => {
     if (boundObject.type === 'start') {
-      boundObject.block.line = findAvailableLine(lineslastEnd)
-      lineslastEnd.push(boundObject.block.end)
+      boundObject.interval.line = findAvailableLine(lineslastEnd)
+      lineslastEnd.push(boundObject.interval.end)
     } else if (boundObject.type === 'end') {
       lineslastEnd = clearLineslastEnd(boundObject.bound)
     }
   })
 
-  return blocks
+  return intervals
 }
 
 module.exports = { order, findAvailableLine }

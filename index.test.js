@@ -20,7 +20,7 @@ test('findAvailableLine 2', () => {
 
 
 test('case1 - no overlap', () => {
-  const blocks = [
+  const intervals = [
     { start: 100, end: 200 },
     { start: 210, end: 300 },
     { start: 310, end: 400 },
@@ -30,11 +30,11 @@ test('case1 - no overlap', () => {
     { start: 210, end: 300, line: 0 },
     { start: 310, end: 400, line: 0 },
   ]
-  expect(order(blocks)).toEqual(expected)
+  expect(order(intervals)).toEqual(expected)
 })
 
 test('case2 - alternated', () => {
-  const blocks = [
+  const intervals = [
     { start: 100, end: 200 },
     { start: 170, end: 300 },
     { start: 250, end: 400 },
@@ -44,11 +44,11 @@ test('case2 - alternated', () => {
     { start: 170, end: 300, line: 1 },
     { start: 250, end: 400, line: 0 },
   ]
-  expect(order(blocks)).toEqual(expected)
+  expect(order(intervals)).toEqual(expected)
 })
 
 test('case3 - waterfall', () => {
-  const blocks = [
+  const intervals = [
     { start: 100, end: 200 },
     { start: 120, end: 220 },
     { start: 140, end: 240 },
@@ -58,6 +58,6 @@ test('case3 - waterfall', () => {
     { start: 120, end: 220, line: 1 },
     { start: 140, end: 240, line: 2 },
   ]
-  expect(order(blocks)).toEqual(expected)
+  expect(order(intervals)).toEqual(expected)
 })
 
