@@ -12,7 +12,7 @@ const findAvailableLine = (lineslastEnd, newStartBound) => {
 const order = intervals => {
   const sortedIntervals = sortBy(intervals, x => x.start)
 
-  let boundObjects = []
+  const boundObjects = []
 
   sortedIntervals.forEach(interval => {
     boundObjects.push({ bound: interval.start, type: 'start', interval })
