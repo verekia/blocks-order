@@ -1,4 +1,4 @@
-const _ = require('lodash')
+const sortBy = require('lodash/sortBy')
 
 const findAvailableLine = (lineslastEnd, newStartBound) => {
   for (i = 0; i < lineslastEnd.length; i++) {
@@ -10,7 +10,7 @@ const findAvailableLine = (lineslastEnd, newStartBound) => {
 }
 
 const order = intervals => {
-  const sortedIntervals = _.sortBy(intervals, x => x.start)
+  const sortedIntervals = sortBy(intervals, x => x.start)
 
   let boundObjects = []
 
@@ -19,7 +19,7 @@ const order = intervals => {
     boundObjects.push({ bound: interval.end, type: 'end', interval })
   })
 
-  const sortedBoundObjects = _.sortBy(boundObjects, x => x.bound)
+  const sortedBoundObjects = sortBy(boundObjects, x => x.bound)
 
   const lineslastEnd = []
 
