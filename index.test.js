@@ -1,4 +1,23 @@
-const order = require('.')
+const { order, findAvailableLine } = require('.')
+
+test('findAvailableLine 0', () => {
+  const linesLastEnds = []
+  expect(findAvailableLine(linesLastEnds, 100)).toBe(0)
+})
+
+test('findAvailableLine 1', () => {
+  const linesLastEnds = [200]
+  expect(findAvailableLine(linesLastEnds, 300)).toBe(0)
+  expect(findAvailableLine(linesLastEnds, 150)).toBe(1)
+})
+
+test('findAvailableLine 2', () => {
+  const linesLastEnds = [200, 300]
+  expect(findAvailableLine(linesLastEnds, 350)).toBe(0)
+  expect(findAvailableLine(linesLastEnds, 250)).toBe(0)
+  expect(findAvailableLine(linesLastEnds, 150)).toBe(2)
+})
+
 
 test('case1 - no overlap', () => {
   const blocks = [
@@ -41,3 +60,4 @@ test('case3 - waterfall', () => {
   ]
   expect(order(blocks)).toEqual(expected)
 })
+
